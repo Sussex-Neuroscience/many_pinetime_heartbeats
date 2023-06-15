@@ -7,6 +7,9 @@ from bleak.backends.device import BLEDevice
 
 async def find_all_devices_services():
     #devices: Sequence[BLEDevice] = await BleakScanner.discover(timeout=5.0)
+    devices= [ "CB:F9:47:BD:83:F3",
+               "DB:0C:6E:BF:5E",
+               "F7:E6:68:B7:A4:71",]
     devices: Sequence[BLEDevice] =  [
                 "CB:F9:47:BD:83:F3",
                 "DB:0C:6E:BF:5E",
