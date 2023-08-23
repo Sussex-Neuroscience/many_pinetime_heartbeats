@@ -49,7 +49,7 @@ async def find_all_devices_services():
                     if client.address.lower()==addresses[0].lower():
                         step_buffer = await client.read_gatt_char(STEP_COUNT_UUID)
                         step_data =  np.frombuffer(step_buffer, dtype=np.int16)
-                        step_data
+                        step_data  step_data[0]
                         # heart_buffer = await client.read_gatt_char(HEART_RATE_UUID)
                         # heart_data = np.frombuffer(heart_buffer, dtype=np.int8)
                         # #print("heart1 "+str(heart_data[1]))
