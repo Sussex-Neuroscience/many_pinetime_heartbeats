@@ -5,7 +5,7 @@ from bleak import BleakClient, BleakScanner
 from bleak.backends.device import BLEDevice
 from qlabinterface import qlab_interface as pqosc
 import time
-
+import sys
 
 oscClient = pqosc.Client()
 
@@ -19,7 +19,33 @@ MODEL_NBR_UUID = "00002a24-0000-1000-8000-00805f9b34fb"
 
 
 #these need to correspond to the addresses of the watches being used at the exhibition:
-addresses= ["CB:F9:47:BD:83:F3","DB:0C:6E:BF:B7:5E","F7:E6:68:B7:A4:71"]
+if sys.platform == "darwin":
+    addresses= ["CB:F9:47:BD:83:F3","DB:0C:6E:BF:B7:5E","F7:E6:68:B7:A4:71"]
+else:
+    addresses= ["CB:F9:47:BD:83:F3","DB:0C:6E:BF:B7:5E","F7:E6:68:B7:A4:71"]
+
+step_levels=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+
+
+step_cues={"watch1":["/cue/*1a/go",
+"/cue/*1b/go",
+"/cue/*1c/go",
+"/cue/*1d/go",
+"/cue/*1e/go",
+"/cue/*1f/go",
+"/cue/*1g/go",
+"/cue/*1h/go",
+"/cue/*1i/go",
+"/cue/*1j/go",
+"/cue/*1k/go",
+"/cue/*1l/go",
+"/cue/*1m/go",
+"/cue/*1n/go",
+"/cue/*1o/go"
+]
+           
+           }
+
 
 
 step_level1 = 10
@@ -51,9 +77,13 @@ async def find_all_devices_services():
     complete_duration = 15 #duration in min
     start = time.time()
     current_time=0
+    #start the displaying the content
+    oscClient.send_message("/cue/0/go")
+                                
     while current_time-start<complete_duration*60:
-        print("big loop")
-        print(current_time-start)
+        
+        #print("big loop")
+        #print(current_time-start)
         short_run_duration=1 #time in minutes
         short_run_start=time.time()
         short_run_current_time=0
@@ -61,11 +91,14 @@ async def find_all_devices_services():
         #while index<max_number:
         index = 0
         while short_run_current_time-short_run_start<short_run_duration*60:
-            print("small_loop")
-            print(short_run_current_time-short_run_start)
+            #print("small_loop")
+            #print(short_run_current_time-short_run_start)
             for d in devices:
+                
                 name = str(d.name)
+                print(name)
                 if name.lower()=="infinitime":
+                    print(d)
                     async with BleakClient(d) as client:
                         
                         #heart_buffer = await client.read_gatt_char(HEART_RATE_UUID)
@@ -82,6 +115,7 @@ async def find_all_devices_services():
                         
                         #watch1
                         if client.address.lower()==addresses[0].lower():
+                            
                             
                             heart1_buffer = await client.read_gatt_char(HEART_RATE_UUID)
                             heart1_data = np.frombuffer(heart1_buffer, dtype=np.int8)
@@ -231,6 +265,7 @@ async def find_all_devices_services():
                                 oscClient.send_message("/cue/*1/liveRate 1.4")
                             if heart3_difference>=heart3_baseline*1.3 and heart3_difference<heart3_baseline*1.4:
                                 oscClient.send_message("/cue/*1/liveRate 2")
+                                
             short_run_current_time=time.time()
             index=index+1#
         current_time=time.time()
@@ -239,4 +274,81 @@ async def find_all_devices_services():
 asyncio.run(find_all_devices_services())
 
 
+
+"""
+
+For watch 1 (red):
+Step count -
+/cue/*1a/go
+/cue/*1b/go
+/cue/*1c/go
+/cue/*1d/go
+/cue/*1e/go
+/cue/*1f/go
+/cue/*1g/go
+/cue/*1h/go
+/cue/*1i/go
+/cue/*1j/go
+/cue/*1k/go
+/cue/*1l/go
+/cue/*1m/go
+/cue/*1n/go
+/cue/*1o/go
+Heart rate -
+For an increase in heart rate -
+/cue/*4inc/go
+For a decrease in heart rate -
+/cue/*4dec/go
+For watch 2 (yellow):
+Step count -
+/cue/*2a/go
+/cue/*2b/go
+/cue/*2c/go
+/cue/*2d/go
+/cue/*2e/go
+/cue/*2f/go
+/cue/*2g/go
+/cue/*2h/go
+/cue/*2i/go
+/cue/*2j/go
+/cue/*2k/go
+/cue/*2l/go
+/cue/*2m/go
+/cue/*2n/go
+/cue/*2o/go
+Heart rate -
+For an increase in heart rate -
+/cue/*5inc/go
+For a decrease in heart rate -
+/cue/*5dec/go
+For watch 3 (blue):
+Step count -
+/cue/*3a/go
+/cue/*3b/go
+/cue/*3c/go
+/cue/*3d/go
+/cue/*3e/go
+/cue/*3f/go
+/cue/*3g/go
+/cue/*3h/go
+/cue/*3i/go
+/cue/*3j/go
+/cue/*3k/go
+/cue/*3l/go
+/cue/*3m/go
+/cue/*3n/go
+/cue/*3o/go
+Heart rate -
+For an increase in heart rate -
+/cue/*6inc/go
+For a decrease in heart rate -
+/cue/*6dec/go
+
+
+
+
+
+
+
+"""
 
