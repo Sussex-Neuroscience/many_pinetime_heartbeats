@@ -68,15 +68,17 @@ async def find_all_devices_services():
 
 
 
-    start = time.time()
-    current_time=0
 
-    #start the displaying of content
-    msg1 = osc_message_builder.OscMessageBuilder(address="/cue/0/go")
-    client1.send(msg1.build())
-    client2.send(msg1.build())
 
-    while (1):                            
+
+
+    while (1):    
+        #start the displaying of content
+        msg1 = osc_message_builder.OscMessageBuilder(address="/cue/0/go")
+        client1.send(msg1.build())
+        client2.send(msg1.build())
+        start = time.time()
+        current_time=0                        
         while current_time-start<complete_duration*60:
             print("started QLAB")
             
