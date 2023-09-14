@@ -62,7 +62,7 @@ short_run_duration=1 #time in minutes
 
 current_time = 0
 async def find_all_devices_services():
-    devices: Sequence[BLEDevice] = await BleakScanner.discover(timeout=5.0)
+    devices: Sequence[BLEDevice] = await BleakScanner.discover(timeout=30.0)
     #print(devices)
 
 
