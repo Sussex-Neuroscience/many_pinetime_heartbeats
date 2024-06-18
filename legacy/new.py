@@ -7,6 +7,16 @@ MODEL_NBR_UUID = "00002a24-0000-1000-8000-00805f9b34fb"
 
 
 """
+Created on Wed Jun  7 23:28:00 2023
+Edited on Tue Jun 18 17:54:00 2024
+@author: andre
+
+Connects to a watch based on its address adds its data to a 1-D array based on buffer amount.
+File is used to testing purposes to check that the software can communicate with the watch and back to the User.
+@param Watch address
+@return Nothing - outputs data back to user
+
+Below is a condensed version of the code
 import asyncio
 from bleak import BleakScanner
 
@@ -22,6 +32,7 @@ import asyncio
 from bleak import BleakClient
 import numpy as np
 
+# Array contains 3 1-D arrays referencing 3 watches
 address = [["CB:F9:47:BD:83:F3"],["DB:0C:6E:BF:5E"],["F7:E6:68:B7:A4:71"]]
 
 async def main(address):
