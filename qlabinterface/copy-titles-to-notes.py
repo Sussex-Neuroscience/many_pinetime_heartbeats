@@ -1,5 +1,6 @@
 from qlab_interface import Interface
 
+#Constant values for the show
 FIRST_CUE = 0
 LAST_CUE = 9999
 
