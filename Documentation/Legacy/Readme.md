@@ -51,8 +51,8 @@ Attempt 2:
 # Legacy Folder Documentation
 1. Introduction
 #### What is the Legacy Folder?
-The Legacy Folder contains a collection of scripts to facilitate the connection between Pinetime watches and other scripts within the **many_pinetime_heartbeats** project. These scripts primarily handle communication protocols, data retrieval, and error management associated with connecting multiple devices.
-<br>
+The Legacy Folder contains a collection of scripts to facilitate the connection between Pinetime watches and other scripts within the **many_pinetime_heartbeats** project. These scripts primarily handle communication protocols, data retrieval, and error management associated with connecting multiple devices.<br>
+
 2. External Libraries
 #### Numpy
 * **Purpose**: Numpy is utilized for numerical operations and data manipulation within scripts.
