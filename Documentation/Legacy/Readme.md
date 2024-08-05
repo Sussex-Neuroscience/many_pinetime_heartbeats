@@ -52,18 +52,18 @@ Attempt 2:
 1. Introduction
 #### What is the Legacy Folder?
 The Legacy Folder contains a collection of scripts to facilitate the connection between Pinetime watches and other scripts within the **many_pinetime_heartbeats** project. These scripts primarily handle communication protocols, data retrieval, and error management associated with connecting multiple devices.
-
+<br>
 2. External Libraries
 #### Numpy
 * **Purpose**: Numpy is utilized for numerical operations and data manipulation within scripts.
 * **Documentation**: [Numpy Documentation](https://numpy.org/doc/1.26/)<br>
-## bleak - Bluetooth Low Energy platform Agnostic Klient
+#### bleak - Bluetooth Low Energy platform Agnostic Klient
 * **Purpose**: Bleak handles Bluetooth Low Energy (BLE) connections across different platforms.
 * **Documentation**: [bleak Documentation](https://bleak.readthedocs.io/en/latest/index.html)<br>
 
 3. Internal Functions and Modules 
-## asyncio
+#### asyncio
 * **Purpose**: Asyncio is used for writing concurrent code, allowing the scripts to manage multiple connections and tasks asynchronously.
 * **Documentation**: [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)<br>
-## typing
+#### typing
 
