@@ -23,7 +23,7 @@ The point of this folder is that it contains multiple scripting to assist with c
     * The library is behaving in a way we weren't expecting
   * Two solutions to above
     * Implementing try and catch statement to understand the logic error
-    * Look through library documentation/potentially talk to library developer and ask them for a technical explaination
+    * Look through library documentation/potentially talk to library developer and ask them for a technical explanation
 
 ## Files
 ### Main
@@ -88,8 +88,22 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
     * **Heart Rate Data** is interpreted as an 8-bit integer array.
     * **Step Count Data** and **Raw Motion Data** are interpreted as 16-bit integer arrays.
   * **Error Handling**: The script includes error handling to catch instances where a device is not found. If the connection fails, an error message is output to the user indicating which device could not be connected.
-  * **Output**: The script prints the heart rate, step count, and raw motion data to the console. This output helps verify that the data is being correctly retrieved and processed. <br>
+  * **Output**: The script prints the heart rate, step count, and raw motion data to the console. This output helps verify that the data is being correctly retrieved and processed.
+* **Usage**:
+  * The script ensures that the software can communicate with Pinetime watches and correctly retrieve the required data. It is useful for debugging and verifying that the connection logic and data processing are functioning as expected.<br>
 ### [Multiple devices](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/multiple_devices.py)
+* **Purpose**: The script allows multiple Pinetime watches to connect to the software simultaneously, enabling the collection of data from several devices at once. This script is crucial for scenarios where data needs to be gathered concurrently from multiple sources.
+* **Functionality**:
+  * **Connecting to Multiple Devices**: The script attempts to connect to a list of Pinetime watches, each identified by its Bluetooth address. The addresses are provided as input, and the script runs asynchronously to manage multiple connections at the same time.
+  * **Notifications and Data Handling**:
+    * Once connected, the script starts listening for notifications on a specified GATT characteristic (in this case, the step count, identified by STEP_COUNT_UUID).
+    * A callback function is defined (callback) that is triggered whenever new data is received from the connected watch. The function prints out the characteristics and the received data.
+  * **Error Handling**:
+    * If the connection to a device fails or an error occurs during the notification process, the script catches and prints the exception. This is important for debugging issues with specific devices or connectivity.
+  * **Asynchronous Execution**:
+    * The main() function uses asyncio.gather() to run the connection process for all devices concurrently. This allows the script to handle multiple connections in parallel, improving efficiency and ensuring that all devices are managed simultaneously.
+* **Usage**:
+  * The script is ideal for testing and development scenarios where multiple Pinetime watches need to be connected and monitored at the same time. It allows developers to observe how multiple devices behave and ensure that the software can handle concurrent connections and data streams effectively.
 ### [Many devices](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/many_devices.py)
 ### [Main](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/main.py)
 
