@@ -50,7 +50,7 @@ Used to check that the software can communicate with the watch and ot the user.
 Attempt 2:
 # Legacy Folder Documentation
 ## 1. Introduction
-#### What is the Legacy Folder?
+### What is the Legacy Folder?
 The Legacy Folder contains a collection of scripts to facilitate the connection between Pinetime watches and other scripts within the **many_pinetime_heartbeats** project. These scripts primarily handle communication protocols, data retrieval, and error management associated with connecting multiple devices.<br>
 
 
@@ -64,17 +64,34 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
 
 
 ## 3. Internal Functions and Modules 
-#### asyncio
+### asyncio
 * **Purpose**: Asyncio is used for writing concurrent code, allowing the scripts to manage multiple connections and tasks asynchronously.
 * **Documentation**: [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)<br>
-#### typing
+### typing
 * **Purpose**: The typing module provides type hints to improve code readability and maintainability.
 * **Documentation**: [typing Documentation](https://docs.python.org/3/library/typing.html)
 * **Overview Sheet**: [typing Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)<br>
 
 ## 4. Common Errors in Legacy Folder
-  #### 1. 
+  ### 1. 
 
 ## 5. File Breakdown
-####
+### [New](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/new.py)
+* **Purpose**: The script connects to a Pinetime watch, retrieves specific data such as heart rate, step count, and raw motion data, and outputs to this data to the user. The file is primarily used for testing purposes to verify that the software can successfully communicate with the watch and return the collected data.
+* **Functionality**: 
+  * **Connections to Watches**: The script connects to multiple Pinetime watches based on their Bluetooth addresses. These addresses are stored in a list, with each address representing a different watch.
+  * **Reading Data**: Once connected, the script reads data from three specific Bluetooth GATT characteristics.
+    * **Heart Rate**: Uses the HEART_RATE_UUID to read the current heart rate.
+    * **Step Count**: Uses the STEP_COUNT_UUID to retrieve the step count.
+    * **Raw Motion Data**: Uses the RAW_XYZ_UUID to obtain raw motion data from the watch’s accelerometer.
+  * **Data Processing**:The retrieved data is converted from its raw byte format into a more usable form using Numpy:
+    * **Heart Rate Data** is interpreted as an 8-bit integer array.
+    * **Step Count Data** and **Raw Motion Data** are interpreted as 16-bit integer arrays.
+  * **Error Handling**: The script includes error handling to catch instances where a device is not found. If the connection fails, an error message is output to the user indicating which device could not be connected.
+  * **Output**: The script prints the heart rate, step count, and raw motion data to the console. This output helps verify that the data is being correctly retrieved and processed. <br>
+### [Multiple devices](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/multiple_devices.py)
+### [Many devices](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/many_devices.py)
+### [Main](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/main.py)
+
+
 
