@@ -1,53 +1,3 @@
-# Breakdowns of the files in Legacy and their libraries
-
-## Context
-### What is the Legacy Folder?
-The point of this folder is that it contains multiple scripting to assist with connecting pinetime watches to the other series of scripts that is the many_pinetime_heartbeats project. 
-
-### External Libraries
-#### Numpy
-[Numpy Documentation](https://numpy.org/doc/1.26/)<br>
-#### bleak - Bluetooth Low Energy platform Agnostic Klient
-[bleak Documentation](https://bleak.readthedocs.io/en/latest/index.html)<br>
-### Internal functions and modules
-#### asyncio
-[asyncio Documentation](https://docs.python.org/3/library/asyncio.html)
-#### typing
-[typing Documentation](https://docs.python.org/3/library/typing.html)<br>
-[typing Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
-### Errors in this folder
-* bleak
-  * bleak library is "randomly" disconnecting
-  * There are two possibilities I can think of for this error
-    * One of the files which handles connection to the watches has a logic error
-    * The library is behaving in a way we weren't expecting
-  * Two solutions to above
-    * Implementing try and catch statement to understand the logic error
-    * Look through library documentation/potentially talk to library developer and ask them for a technical explanation
-
-## Files
-### Main
-
-### Many devices
-
-### Multiple devices
-The purpose of this file is to:
-* Connect to a watch based on address given as input
-  * If cannot connect to device output error to user
-  * Else 
-### new
-The purpose of this file is to:
-* Connect to a watch based on a address given to it
-* Wait for the watch to generate data such as
-  * Heartrate
-  * Step count
-  * Raw data (Not 100% what this entails)
-* Output the data it has collected back to the user
-* Or if the device address does not link to a devices gives a device not found error back to the User
-Used to check that the software can communicate with the watch and ot the user.
-
-
-Attempt 2:
 # Legacy Folder Documentation
 ## 1. Introduction
 ### What is the Legacy Folder?
@@ -72,8 +22,18 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
 * **Documentation**: [typing Documentation](https://docs.python.org/3/library/typing.html)
 * **Overview Sheet**: [typing Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)<br>
 
-## 4. Common Errors in Legacy Folder
-  ### 1. 
+## 4. Error Handling
+  1. ### bleak library randomly disconnects
+    * **Issue**: The bleak library disconnects from devices without a clear pattern
+    * **Possible Causes**:
+      * There might be a logic error in one of the scripts responsible for managing the connection to the watches.
+      * The bleak library could be exhibiting behaviour that we did not anticipate.
+    * **Potential Solutions**:
+      * Implement try and catch statements around connection logic to better understand where the error occurs.
+      * Review the bleak documentation for any known issues or contact the library maintainers for a deeper technical explanation.
+    * **Actual Solution**:
+      * Whilst testing the scripts on a MacOS Device the user disabled their WI-FI which in turn disabled their BLUETOOTH connection which led to the connection between the computer and watches being severed.
+      * To prevent this issue occurring from attempting to connect to the watch and transferring data between the watches and your devices, please do not disable the WI-FI or BLUETOOTH.
 
 ## 5. File Breakdown
 ### [New](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/new.py)
@@ -129,7 +89,7 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
   * **No Input or Output Parameters**:
     * The script does not take any input parameters nor does it return any outputs. It simply performs the device discovery and outputs the results directly to the console.
 * **Usage**:
-  * The main.py script is useful for quickly identifying what BLE devices are within range. This is typically the first step in any Bluetooth-related project, allowing developers to confirm that their devices are discoverable and accessible before attempting more complex interactions, such as connecting to the devices or retrieving specific data.
+  * The main.py script is useful for quickly identifying what BLE devices are within range. This is typically the first step in any Bluetooth-related project, allowing developers to confirm that their devices are discoverable and accessible before attempting more complex interactions, such as connecting to the devices or retrieving specific data.<br>
 
 
 
