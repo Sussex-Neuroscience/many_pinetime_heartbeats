@@ -24,16 +24,16 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
 
 ## 4. Error Handling
   ### 1. bleak library randomly disconnects
-    * **Issue**: The bleak library disconnects from devices without a clear pattern
-    * **Possible Causes**:
-      * There might be a logic error in one of the scripts responsible for managing the connection to the watches.
-      * The bleak library could be exhibiting behaviour that we did not anticipate.
-    * **Potential Solutions**:
-      * Implement try and catch statements around connection logic to better understand where the error occurs.
-      * Review the bleak documentation for any known issues or contact the library maintainers for a deeper technical explanation.
-    * **Actual Solution**:
-      * Whilst testing the scripts on a MacOS Device the user disabled their WI-FI which in turn disabled their BLUETOOTH connection which led to the connection between the computer and watches being severed.
-      * To prevent this issue occurring from attempting to connect to the watch and transferring data between the watches and your devices, please do not disable the WI-FI or BLUETOOTH.
+  * **Issue**: The bleak library disconnects from devices without a clear pattern
+  * **Possible Causes**:
+    * There might be a logic error in one of the scripts responsible for managing the connection to the watches.
+    * The bleak library could be exhibiting behaviour that we did not anticipate.
+  * **Potential Solutions**:
+    * Implement try and catch statements around connection logic to better understand where the error occurs.
+    * Review the bleak documentation for any known issues or contact the library maintainers for a deeper technical explanation.
+  * **Actual Solution**:
+    * Whilst testing the scripts on a MacOS Device the user disabled their WI-FI which in turn disabled their BLUETOOTH connection which led to the connection between the computer and watches being severed.
+    * To prevent this issue occurring from attempting to connect to the watch and transferring data between the watches and your devices, please do not disable the WI-FI or BLUETOOTH.
 
 ## 5. File Breakdown
 ### [New](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/legacy/new.py)
