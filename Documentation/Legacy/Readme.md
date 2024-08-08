@@ -23,7 +23,7 @@ The Legacy Folder contains a collection of scripts to facilitate the connection 
 * **Overview Sheet**: [typing Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)<br>
 
 ## 4. Error Handling
-  1. ### bleak library randomly disconnects
+  ### 1. bleak library randomly disconnects
     * **Issue**: The bleak library disconnects from devices without a clear pattern
     * **Possible Causes**:
       * There might be a logic error in one of the scripts responsible for managing the connection to the watches.
