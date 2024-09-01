@@ -30,7 +30,7 @@ class IntroWindow(QWidget):
         self.connect_all_button = QPushButton("Connect all devices",self)
         self.connect_all_button.clicked.connect(self.on_connect_all_button_clicked)
         self.connect_one_button = QPushButton("Connect one device",self)
-        self.connect_one_button.clicked.connect(self.on_connect_one_button_clicked())
+        self.connect_one_button.clicked.connect(self.on_connect_one_button_clicked)
 
         # Adding the buttons to the layout
         layout = QVBoxLayout()
