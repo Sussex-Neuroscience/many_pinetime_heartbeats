@@ -43,8 +43,11 @@ async def connect_to_device(address):
             await client.stop_notify(notify_uuid)
         except Exception as e:
             print(e)
-
+        # Actually allows the watch to be disconnected
+        finally:
+            await client.disconnect()
     print("disconnect from", address)
+
 
 
 def main(addresses):

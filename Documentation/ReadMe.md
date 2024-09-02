@@ -4,5 +4,8 @@
 ### Pinetime Folder
 [Pinetime]()<br>
 ### Qlabinterface Folder
-[qlab](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/tree/main/Documentation/Qlabinterface)<br>
+[Qlab](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/tree/main/Documentation/Qlabinterface)<br>
+### PyQtInterface Folder
+[PyQt](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/tree/main/Documentation/PyQtInterface)<br>
 ### Miscellaneous Files
+
