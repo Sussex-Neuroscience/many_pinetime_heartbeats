@@ -5,7 +5,7 @@ The folder contains a collection of scripts which makeup the GUI (Graphical User
 
 However, this does not mean all the scripts are used, as some feature code snippet examples. Which proves useful when debugging the Main_UI script.
 
-## 2. External Libraries
+## 2. External Libraries and Modules
 ### PyQt6
 * **Purpose**: Enables Python to be used as an alternative application development language to C++ on all supported platforms including iOS and Android. 
 * **Documentation**: [PyQt6](https://www.riverbankcomputing.com/static/Docs/PyQt6/)<br>
@@ -15,17 +15,36 @@ However, this does not mean all the scripts are used, as some feature code snipp
 * PyQt gets the latest Qt features faster and often in a more stable state than PySide.
 * PyQt has more extensive documentation than that of PySide.
 
-## 3. Internal Libraries
+## 3. Internal Libraries and Modules
 ### Sys
 * **Purpose**: Provides functions and variables which are used to manipulate different parts of the Python Runtime Enviroment.
 * **Documentation**: [sys](https://docs.python.org/3/library/sys.html)<br>
+### asyncio
+* **Purpose**: Asyncio is used for writing concurrent code, allowing the scripts to manage multiple connections and tasks asynchronously.
+* **Documentation**: [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)<br>
 
 ## 4. Error Handling
-**Will add more content when errors are discovered.**
+### 1. bleak threading error
+* **Issue**: Just getting an error message through terminal saying unable to complete action cause of threading error.
+* **Possible cause**: One of the modules/libraries that bleak imports from hasn't been properly setup or included at all.
+* **Possible solutions**: 
+* **Actual solution**:
 
 ## 5. File Breakdown
 ### [Basic UI](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/PyQtInterface/basic_ui.py)
-
+* This file was my inital attempt at trying to use PyQt6.
+* As for a while I was struggling to use the library and need a place to mess around and try stuff out.
+* That's why compared to other files in this folder, the code is very simple and has little to no comments.
 ### [Functionality UI](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/PyQtInterface/functionality_UI.txt)
-
+* This file contains a checklist for what I had originally wanted on my inital attempt at creating the GUI.
+* However, since starting this project and becoming more confident with PyQt6, it no longer has purpose
 ### [Main UI](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/PyQtInterface/main_ui.py)
+* This file contains my inital attempt at creating a centralized GUI using PyQt.
+* However, this file is no longer being work on and instead is being used to show how not to code a GUI in PyQt.
+* This is mainly due to the way I was implementing changing between layouts and the relationship between QWidgets just wasn't working.
+### [Main UI 2](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/PyQtInterface/main_ui_2.py)
+* This is the new main file for the UI.
+* As compared to the previous Main UI file it uses QStackWidgets, which allows only one Widget to be visible at a time but there are multiple in the same place which aren't visible.
+* The file only contains one class for all the code as changing layout is just done through functions.
+* Finally compared to the previous file this file features alot more comments and the code is layout in a way that is easier to read.
+#### Class and Function breakdown

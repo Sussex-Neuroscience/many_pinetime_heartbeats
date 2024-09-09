@@ -9,7 +9,7 @@ import asyncio
 from bleak import BleakScanner, BleakClient
 import os
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QStackedWidget, QTextEdit, QFileDialog
+from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QStackedWidget, QTextEdit, QFileDialog, QComboBox, QApplication
 
 
 class IntroWindow(QMainWindow):
@@ -69,12 +69,20 @@ class IntroWindow(QMainWindow):
 
 
         #Layout 4: Connect one device
-        # Need text input box to enter max code or drop down to select which device
+        # Need text input box to enter max code or drop down to select which device, for this I will be using a drop-down box
+        layout4_widget = QWidget(self)
+        layout4_vbox = QVBoxLayout()
+        self.combobox_devices = QComboBox(self)
+        self.combobox_devices.addItems(self, self.device_info)
+        self.back_button3 = QPushButton("Back", self)
+        self.back_button3.clicked.connect(self.on_back_button_clicked)
+        layout4_widget.setLayout(layout4_vbox)
 
         #Add layouts to the QStackedWidget
         self.central_widget.addWidget(layout1_widget)  #Index 0
         self.central_widget.addWidget(layout2_widget)  #Index 1
         self.central_widget.addWidget(layout3_widget)  #Index 2
+        self.central_widget.addWidget(layout4_widget)  #Index 3
 
         #Start with layout 1
         self.central_widget.setCurrentIndex(0)
@@ -141,6 +149,10 @@ class IntroWindow(QMainWindow):
             asyncio.run(main(self.device_info))
         except Exception as e:
             print(f"An error occurred: {e}")
+
+    def on_connect_one_button_clicked(self):
+        #Change to layout 4
+        self.central_widget.setCurrentIndex(3)
 
     def on_back_button_clicked(self):
         #Go back to the first layout

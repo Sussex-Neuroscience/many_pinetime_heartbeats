@@ -1,3 +1,4 @@
+from bleak.exc import BleakDeviceNotFoundError
 
 MOTION_SERVICE_UUID = "00030000-78fc-48fe-8e23-433b3a1942d0"
 STEP_COUNT_UUID = "00030001-78fc-48fe-8e23-433b3a1942d0"
