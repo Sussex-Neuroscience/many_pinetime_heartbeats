@@ -14,6 +14,13 @@ However, this does not mean all the scripts are used, as some feature code snipp
 * PyQt has been around longer than PySide which means the community is more active allowing for questions to be answered quicker or the answer already exists online.
 * PyQt gets the latest Qt features faster and often in a more stable state than PySide.
 * PyQt has more extensive documentation than that of PySide.
+### Numpy
+* **Purpose**: Numpy is utilized for numerical operations and data manipulation within scripts.
+* **Documentation**: [Numpy Documentation](https://numpy.org/doc/1.26/)<br>
+### bleak - Bluetooth Low Energy platform Agnostic Klient
+* **Purpose**: Bleak handles Bluetooth Low Energy (BLE) connections across different platforms.
+* **Documentation**: [bleak Documentation](https://bleak.readthedocs.io/en/latest/index.html)<br>
+
 
 ## 3. Internal Libraries and Modules
 ### Sys
@@ -26,9 +33,21 @@ However, this does not mean all the scripts are used, as some feature code snipp
 ## 4. Error Handling
 ### 1. bleak threading error
 * **Issue**: Just getting an error message through terminal saying unable to complete action cause of threading error.
-* **Possible cause**: One of the modules/libraries that bleak imports from hasn't been properly setup or included at all.
+* **Possible cause**: 
+  * One of the modules/libraries that bleak imports from hasn't been properly setup or included at all.
+  * The logic of the code being implemented not properly being implemented leading to logic errors.
 * **Possible solutions**: 
+  * Importing the required libraries
+  * Fixing the logic of the function that hasn't properly been implemented
 * **Actual solution**:
+### 2. InfinitTime device error
+* **Issue**: When pressing the "Scan for devices" button sometimes the InfiniTime watches just don't get scanned or not all of the watches will get scanned.
+* **Potential cause**:
+  * The watches having a weak bluetooth emitter, which is flaky and isn't always picked up from computer's bluetooth scan.
+  * An error in my function for discovering devices and receiving their device information.
+* **Potential solutions**:
+* **Actual solution**:
+### If any other error are found please create an issue
 
 ## 5. File Breakdown
 ### [Basic UI](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/PyQtInterface/basic_ui.py)

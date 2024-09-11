@@ -279,13 +279,13 @@ class IntroWindow(QMainWindow):
             print("Error occured: ",e)
         """
         try:
+            self.user_info_textbox.setText("All devices connected to and data received")
             self.worker = DeviceWorker(self.device_info)
             print("first")
             self.worker.update_signal.connect(self.update_device_info)
             print("second")
             self.worker.start()
             print("third")
-            self.user_info_textbox.setText("All devices connected to and data received")
         except Exception as e:
             print(f"An error occurred: {e}")
 
