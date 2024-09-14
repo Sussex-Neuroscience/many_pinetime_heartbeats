@@ -8,7 +8,7 @@ And will connect the other qlabinterface scripts.
 import asyncio
 import numpy as np
 from bleak import BleakScanner, BleakClient
-from bleak.exc import BleakDeviceNotFoundError
+from bleak.exc import BleakDeviceNotFoundError, BleakError
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QStackedWidget, QTextEdit, QFileDialog, QComboBox, QApplication
 from PyQt6.QtCore import QThread, pyqtSignal
@@ -147,7 +147,10 @@ class IntroWindow(QMainWindow):
         layout4_vbox = QVBoxLayout()
         ##Adding drop-down box with device and mac address to choose from + functionality
         self.combobox_devices = QComboBox(self)
+        self.combobox_devices.addItem("Select a Device")
         self.combobox_devices.addItems(self.device_info)
+        ##Showing output to users
+
         ##Adding back button + functionality
         self.back_button3 = QPushButton("Back", self)
         self.back_button3.clicked.connect(self.on_back_button_clicked)
@@ -171,6 +174,9 @@ class IntroWindow(QMainWindow):
         try:
             async def main():
                 devices = await BleakScanner.discover()
+                #Explicity raise an error if no devices found
+                if not devices:
+                    raise BleakError("No devices found")
                 for d in devices:
                     print(d)
                 return devices
@@ -186,8 +192,19 @@ class IntroWindow(QMainWindow):
                 if device.name == "InfiniTime":
                     self.device_info.append([device.address,device.name])
             print(self.device_info)
+        except BleakError as e:
+            print(f"Error occured during scanning: {e}")
+            self.num_devices_textbox.setText("Please turn your bluetooth on")
+        except OSError as e:
+            error = str(e)
+            print(f"Error occured during scanning: {error}")
+            if "WinError -2147020577" in error:
+                self.num_devices_textbox.setText("Please turn your bluetooth on")
+            else:
+                self.num_devices_textbox.setText("An unexpected error occurred")
         except Exception as e:
             print(f"An error occurred: {e}")
+            self.num_devices_textbox.setText("An unexpected error occurred")
 
     def on_connect_all_button_clicked(self):
         #Change to third layout
@@ -282,14 +299,14 @@ class IntroWindow(QMainWindow):
             self.user_info_textbox.setText("All devices connected to and data received")
             self.worker = DeviceWorker(self.device_info)
             print("first")
-            self.worker.update_signal.connect(self.update_device_info)
+            self.worker.update_signal.connect(self.update_device_info_multiple)
             print("second")
             self.worker.start()
             print("third")
         except Exception as e:
             print(f"An error occurred: {e}")
 
-    def update_device_info(self, info):
+    def update_device_info_multiple(self, info):
         #self.device_info_textbox.setText("All devices connected to and data received")
         #self.device_info_stats.append(info)
         try:
@@ -301,9 +318,28 @@ class IntroWindow(QMainWindow):
         except Exception as e:
             print(f"Error occured: ",e)
 
+    def update_device_info_one(self, info):
+        try:
+            print(f"updating device_info: {info}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
     def on_connect_one_button_clicked(self):
         #Change to layout 4
         self.central_widget.setCurrentIndex(3)
+        # Getting the current selection on drop-down menu
+        self.combobox_devices.currentIndexChanged.connect(self.combo_box_changed)
+
+    def combo_box_changed(self):
+        choice = self.combobox_devices.currentText()
+        try:
+            self.worker = DeviceWorker(choice)
+            self.worker.update_signal.connect(self.update_device_info_one)
+            self.worker.start()
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
 
     def on_back_button_clicked(self):
         #Go back to the first layout
