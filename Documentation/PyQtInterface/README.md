@@ -20,6 +20,9 @@ However, this does not mean all the scripts are used, as some feature code snipp
 ### bleak - Bluetooth Low Energy platform Agnostic Klient
 * **Purpose**: Bleak handles Bluetooth Low Energy (BLE) connections across different platforms.
 * **Documentation**: [bleak Documentation](https://bleak.readthedocs.io/en/latest/index.html)<br>
+### Async - Asynchronous
+* **Purpose**: Asyncio is used for writing concurrent code, allowing the scripts to manage multiple connections and tasks asynchronously.
+* **Documentation**: [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)<br>
 
 
 ## 3. Internal Libraries and Modules
