@@ -147,8 +147,8 @@ class IntroWindow(QMainWindow):
         layout4_vbox = QVBoxLayout()
         ##Adding drop-down box with device and mac address to choose from + functionality
         self.combobox_devices = QComboBox(self)
-        self.combobox_devices.addItem("Select a Device")
-        self.combobox_devices.addItems(self.device_info)
+        #self.combobox_devices.addItem("Select a Device")
+        #self.combobox_devices.addItems(self.device_info)
         ##Showing output to users
 
         ##Adding back button + functionality
@@ -184,6 +184,9 @@ class IntroWindow(QMainWindow):
             print(devices)
             #Showing how many devices there are around
             self.num_devices_textbox.setText(f"Number of devices: {len(devices)} ")
+            #Clearing previous list and combo box
+            self.combobox_devices.clear()
+            self.combobox_devices.addItem("Select a Device")
             #Showing the all device information
             self.device_info = []
             for device in devices:
@@ -192,6 +195,9 @@ class IntroWindow(QMainWindow):
                 if device.name == "InfiniTime":
                     self.device_info.append([device.address,device.name])
             print(self.device_info)
+            #Adding devices names to combo box
+            for device in self.device_info:
+                self.combobox_devices.addItem(str(device))
         except BleakError as e:
             print(f"Error occured during scanning: {e}")
             self.num_devices_textbox.setText("Please turn your bluetooth on")
@@ -333,6 +339,11 @@ class IntroWindow(QMainWindow):
     def combo_box_changed(self):
         choice = self.combobox_devices.currentText()
         try:
+            #Find corresponding address for selected device
+            for device in self.device_info:
+                if device[1] == choice:
+                    selected_address = device[0]
+                    break
             self.worker = DeviceWorker(choice)
             self.worker.update_signal.connect(self.update_device_info_one)
             self.worker.start()
