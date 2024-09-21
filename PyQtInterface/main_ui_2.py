@@ -5,13 +5,15 @@ Created on Mon Sep 2 21:30 2024
 This script will contain all the code to implement features listed in 'functionality_UI.txt'.
 And will connect the other qlabinterface scripts.
 """
+import threading
 import asyncio
+import threading
 import numpy as np
 from bleak import BleakScanner, BleakClient
 from bleak.exc import BleakDeviceNotFoundError, BleakError
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLineEdit, QStackedWidget, QTextEdit, QFileDialog, QComboBox, QApplication
-from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal, QTimer, Qt
 
 #Class to deal with asyncio functions never executing due to threading issues
 class DeviceWorker(QThread):
@@ -24,6 +26,7 @@ class DeviceWorker(QThread):
 
     #Connect to device
     async def connect_to_device(self, address):
+        print(f"Connect to device: {address}")
         #UUIDs for reading
         HEART_RATE_UUID = "00002a37-0000-1000-8000-00805f9b34fb"
         STEP_COUNT_UUID = "00030001-78fc-48fe-8e23-433b3a1942d0"
@@ -53,28 +56,47 @@ class DeviceWorker(QThread):
     #Connect to all devices
     async def connect_all_devices(self):
         results = []
-        for device in self.devices:
-            result = await self.connect_to_device(device[0])
-            results.append(result)
-            print(results)
-            self.update_signal.emit(result)
-        return results
+        #Checking self.devices has devices
+        print(f"Devices to connect: {self.devices}")
+        try:
+            for device in self.devices:
+                print(f"Connecting to device: {device[0]}")
+                result = await self.connect_to_device(device[0])
+                print(f"Emitting result for device: {result}")
+                results.append(result)
+                print(results)
+                self.update_signal.emit(result)
+            return results
+        except Exception as e:
+            print(f"Error connecting to device: {e}")
 
     #Running the asyncio function
     def run(self):
         #asyncio.run(self.connect_all_devices())
         #asyncio.create_task(self.connect_all_devices())
+        #Checking that working thread is running
+        print("Worker thread started")
         loop = asyncio.get_event_loop()
         asyncio.set_event_loop(loop)
-        loop.run_until_complete(self.connect_all_devices())
+        try:
+            print("Connecting to devices")
+            loop.run_until_complete(self.connect_all_devices())
+        except Exception as e:
+            print(f"Error connecting to devices: {e}")
 
 
 
 #Main Window class
 class IntroWindow(QMainWindow):
+    update_signal = pyqtSignal(str)
     def __init__(self):
         super().__init__()
         self.setupUI()
+        #Create asyncio event loop
+        self.event_loop = asyncio.new_event_loop()
+        #Start event loop in seperate thread
+        self.async_thread = threading.Thread(target = self.start_asyncio_loop, daemon=True)
+        self.async_thread.start()
 
     def setupUI(self):
         self.setWindowTitle("Pinetime Heartbeat Interface")
@@ -315,6 +337,12 @@ class IntroWindow(QMainWindow):
     def update_device_info_multiple(self, info):
         #self.device_info_textbox.setText("All devices connected to and data received")
         #self.device_info_stats.append(info)
+        #Checking if function is being called
+        print("Function has been called")
+        #Seeing how many times its being called
+        global call_count
+        call_count += 1
+        print(call_count)
         try:
             print(f"updating device_info: {info}")
             if self.device_info_textbox:
@@ -355,6 +383,27 @@ class IntroWindow(QMainWindow):
     def on_back_button_clicked(self):
         #Go back to the first layout
         self.central_widget.setCurrentIndex(0)
+
+    def start_asyncio_loop(self):
+        #Start asyncio loop in seperate thread
+        try:
+            asyncio.set_event_loop(self.event_loop)
+            self.event_loop.run_forever()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    def close_asyncio_loop(self, event):
+        #Stop asyncio loop and close thread when exiting app
+        try:
+            if hasattr(self, "event_loop") and self.event_loop.is_running():
+                self.event_loop.call_soon_threadsafe(self.event_loop.close)
+            #Ensure asyncio thread if closed
+            if hasattr(self, "async_thread") and self.async_thread.is_alive():
+                self.async_thread.join()
+            event.accept()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
 
 
 if __name__ == '__main__':
