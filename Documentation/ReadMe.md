@@ -8,7 +8,7 @@ Welcome to the documentation folder for the **Many_Pinetimes_Heartbeat** project
 - [InfiniTime Docs](#infinititime-documentation)
 - [Pinetime Website](#pinetime-website)
 - [Miscellaneous Files](#miscellaneous-files)
-- [Setup and Usage]
+- [Setup and Usage](#setup-and-usage-guide)
 
 ### Legacy Folder
 [Legacy](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Legacy/Readme.md)<br>
@@ -34,5 +34,5 @@ This link leads directly to the website for the Pinetime watches including techn
 This is where any explanations for any miscellaneous files used during the development process can be found.
 
 ### Setup and Usage Guide
-[Guide]()<br>
-This folders explains how to setup the app to work on your system and how to use the app.
+[Guide](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/SetupUsage/Readme.md)<br>
+This folder explains how to set up the app to work on your system and how to use the app.
