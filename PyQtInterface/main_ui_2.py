@@ -23,6 +23,8 @@ class DeviceWorker(QThread):
     def __init__(self, devices):
         super().__init__()
         self.devices = devices
+        self.start()
+        print(devices)
 
     #Connect to device
     async def connect_to_device(self, address):
@@ -70,6 +72,11 @@ class DeviceWorker(QThread):
         except Exception as e:
             print(f"Error connecting to device: {e}")
 
+    #Checking to see if I can run functions
+    async def test(self):
+        await asyncio.sleep(2)
+        print("Test")
+
     #Running the asyncio function
     def run(self):
         #asyncio.run(self.connect_all_devices())
@@ -80,9 +87,14 @@ class DeviceWorker(QThread):
         asyncio.set_event_loop(loop)
         try:
             print("Connecting to devices")
-            loop.run_until_complete(self.connect_all_devices())
+            loop.run_until_complete(self.test())
+            results = loop.run_until_complete(self.connect_all_devices())
+            print(f"Connection results: {results}")
+            return results
         except Exception as e:
             print(f"Error connecting to devices: {e}")
+        finally:
+            loop.close()
 
 
 
