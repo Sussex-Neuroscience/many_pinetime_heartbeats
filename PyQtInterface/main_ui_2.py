@@ -57,6 +57,7 @@ class DeviceWorker(QThread):
 
     #Connect to all devices
     async def connect_all_devices(self):
+        await asyncio.sleep(1)
         results = []
         #Checking self.devices has devices
         print(f"Devices to connect: {self.devices}")
