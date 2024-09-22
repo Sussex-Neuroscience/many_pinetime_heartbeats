@@ -84,18 +84,20 @@ class DeviceWorker(QThread):
         #asyncio.create_task(self.connect_all_devices())
         #Checking that working thread is running
         print("Worker thread started")
-        loop = asyncio.get_event_loop()
-        asyncio.set_event_loop(loop)
+        #loop = asyncio.get_event_loop()
+        #asyncio.set_event_loop(loop)
         try:
             print("Connecting to devices")
-            loop.run_until_complete(self.test())
-            results = loop.run_until_complete(self.connect_all_devices())
+            #loop.run_until_complete(self.test())
+            #results = loop.run_until_complete(self.connect_all_devices())
+            results = asyncio.run(self.connect_all_devices())
             print(f"Connection results: {results}")
             return results
         except Exception as e:
             print(f"Error connecting to devices: {e}")
         finally:
-            loop.close()
+            #loop.close()
+            pass
 
 
 
