@@ -102,17 +102,31 @@ def main(page: ft.Page):
         thread = threading.Thread(target=worker.run)
         thread.start()
 
+    def on_connect_one_button_click(e):
+        page.controls[2].value = "Connecting to one device..."
+        page.update()
+        worker = DeviceWorker([devices_dropdown.value], page)
+        thread = threading.Thread(target=worker.run)
+        thread.start()
+
     def exit_button_click(e):
         page.window.close()
 
-
+    #Button to scan for devices
     scan_button = ft.ElevatedButton(text="Scan for devices", on_click=on_scan_button_click)
+    #Button to connect to all devices
     connect_all_button = ft.ElevatedButton(text="Connect all devices", on_click=on_connect_all_button_click)
+    #Button to connect one device
+    connect_one_button = ft.ElevatedButton(text="Connect one device", on_click=on_connect_one_button_click)
+    #Button to exit the app
     exit_button = ft.ElevatedButton(text="Exit", on_click=exit_button_click)
+    #Output textboxes
     device_output = ft.TextField(label="Output", multiline=True, width=400, height=200)
     device_data_output = ft.TextField(label="Device Data", multiline=True, width=400, height=200)
+    #Drop down box to select single device
+    devices_dropdown = ft.Dropdown(width= 180, hint_text= "Choose a device", options = [ft.dropdown.Option(device) for device in device_info])
 
-    page.add(scan_button, device_output, connect_all_button, device_data_output, exit_button)
+    page.add(scan_button, device_output, connect_all_button, connect_one_button, devices_dropdown, device_data_output, exit_button)
 
 
 ft.app(target=main)
