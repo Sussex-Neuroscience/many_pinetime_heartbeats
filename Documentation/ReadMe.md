@@ -5,6 +5,7 @@ Welcome to the documentation folder for the **Many_Pinetimes_Heartbeat** project
 - [Legacy Folder](#legacy-folder)
 - [Qlabinterface Folder](#qlabinterface-folder)
 - [PyQt-Interface Folder](#pyqtinterface-folder)
+- [Flet Folder](#flet-folder)
 - [InfiniTime Docs](#infinititime-documentation)
 - [Pinetime Website](#pinetime-website)
 - [Miscellaneous Files](#miscellaneous-files)
@@ -20,7 +21,11 @@ This folder contains versions of code from another codebase which controls how d
 
 ### PyQtInterface Folder
 [PyQt](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/tree/main/Documentation/PyQtInterface)<br>
-This folder contains information regarding the development process and current codebase for UI + Full app.
+This folder contains information regarding the development process and previous codebase for UI + Full app.
+
+### Flet Folder
+[Flet]()
+This folder contains informations regarding the development process and current codebase for GUI + Full app with Web app compatibility.
 
 ### InfinitiTime Documentation
 [InfinitiTime](https://github.com/InfiniTimeOrg/InfiniTime/blob/main/doc/ble.md)<br>
