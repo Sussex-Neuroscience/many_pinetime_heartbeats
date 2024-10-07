@@ -2,8 +2,14 @@
 
 An example of a minimal Flet app.
 
-To run the app:
-
+## Ways to run the app
+### Running a GUI from the terminal
 ```
-flet run [app_directory]
+cd Flet
+flet run 
+```
+### Running a Web app from the terminal
+```
+cd Flet
+flet run --web
 ```
