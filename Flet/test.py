@@ -35,7 +35,7 @@ class DeviceWorker:
         except BleakDeviceNotFoundError:
             return f"Device {address} not found"
         finally:
-            if client.is_connected and client:
+            if client.is_connected:
                 await client.disconnect()
 
     async def connect_all_devices(self):
@@ -68,9 +68,6 @@ def main(page: ft.Page):
     device_info = []
     page.title = "Pinetime Heartbeat Interface"
     page.padding = 20
-
-    def update_dropdown():
-        pass
 
     def on_scan_button_click(e):
         page.controls[1].value = "Scanning for devices..."
@@ -116,24 +113,28 @@ def main(page: ft.Page):
     def exit_button_click(e):
         page.window.close()
 
-    #Header text which describes what the app does
-    header = ft.Text("Pinetime Heartbeat Interface",style="headlineMedium")
-    #Button to scan for devices
-    scan_button = ft.ElevatedButton(text="Scan for devices", on_click=on_scan_button_click)
-    #Button to connect to all devices
-    connect_all_button = ft.ElevatedButton(text="Connect all devices", on_click=on_connect_all_button_click)
-    #Button to connect one device
-    connect_one_button = ft.ElevatedButton(text="Connect one device", on_click=on_connect_one_button_click)
-    #Button to exit the app
-    exit_button = ft.ElevatedButton(text="Exit", on_click=exit_button_click)
-    #Output textboxes
-    device_output = ft.TextField(label="Output", multiline=True, width=400, height=200)
-    device_data_output = ft.TextField(label="Device Data", multiline=True, width=400, height=200)
-    #Drop down box to select single device
-    devices_dropdown = ft.Dropdown(width= 180, hint_text= "Choose a device", options = [ft.dropdown.Option(device) for device in device_info])
-    print(devices_dropdown)
+    # Layout for better organization
+    header = ft.Text("Bluetooth Device Interface", style="headlineMedium", weight="bold")
 
-    page.add(header, scan_button, device_output, connect_all_button, connect_one_button, devices_dropdown, device_data_output, exit_button)
+    scan_button = ft.ElevatedButton(text="Scan for devices", on_click=on_scan_button_click, width=200)
+    connect_all_button = ft.ElevatedButton(text="Connect all devices", on_click=on_connect_all_button_click, width=200)
+    connect_one_button = ft.ElevatedButton(text="Connect one device", on_click=on_connect_one_button_click, width=200)
+    exit_button = ft.ElevatedButton(text="Exit", on_click=exit_button_click, width=200)
 
+    device_output = ft.TextField(label="Output", multiline=True, width=400, height=150)
+    device_data_output = ft.TextField(label="Device Data", multiline=True, width=400, height=150)
+    devices_dropdown = ft.Dropdown(width=200, hint_text="Choose a device", options=[ft.dropdown.Option(device) for device in device_info])
+
+    # Organize buttons in a row
+    button_row = ft.Row([scan_button, connect_all_button, connect_one_button, exit_button], alignment="center", spacing=20)
+
+    # Layout the components
+    page.add(
+        header,
+        devices_dropdown,
+        button_row,
+        device_output,
+        device_data_output
+    )
 
 ft.app(target=main)
