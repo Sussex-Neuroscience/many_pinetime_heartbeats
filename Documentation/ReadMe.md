@@ -24,7 +24,7 @@ This folder contains versions of code from another codebase which controls how d
 This folder contains information regarding the development process and previous codebase for UI + Full app.
 
 ### Flet Folder
-[Flet](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Flet/Readme.md)
+[Flet](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Flet/Readme.md)<br>
 This folder contains informations regarding the development process and current codebase for GUI + Full app with Web app compatibility.
 
 ### InfinitiTime Documentation

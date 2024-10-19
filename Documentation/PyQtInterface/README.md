@@ -70,3 +70,7 @@ However, this does not mean all the scripts are used, as some feature code snipp
 * The file only contains one class for all the code as changing layout is just done through functions.
 * Finally compared to the previous file this file features alot more comments and the code is layout in a way that is easier to read.
 #### Class and Function breakdown
+Worker Class + Asyncio + Threading 
+
+## 6. Why PyQt6 is no longer being used
+This boiled down to several errors which I could not find a fix for, my fix did not work or the libraries being used work fully compatible with each other.
