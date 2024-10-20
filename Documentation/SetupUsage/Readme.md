@@ -29,6 +29,7 @@ cd many_pinetime_heartbeats
 #### Install dependencies
 This project uses several Python libraries including Flet, Asyncio, Threading, NumPy, Bleak and Bleak.exc (extension of Bleak).
 ##### Option 1: Using requirements.txt
+(This file can be found in the Flet folder.)
 ```shell
 pip install -r requirements.txt
 ```
@@ -67,13 +68,17 @@ This will open the app on your default web browser however it be still be hosted
 
 ### Libraries Used
 1. #### **Flet**
-[Flet](https://flet.dev/) is a Python framework for building web, desktop, and mobile apps. It's used here to create the Graphical User Interface (GUI) for the app.
+[Flet](https://flet.dev/) is a Python framework for building web, desktop, and mobile apps. It's used here to create the Graphical User Interface (GUI) for the app.<br>
+
 2. #### **Asyncio**
-[Asyncio](https://docs.python.org/3/library/asyncio.html) is a library used to write concurrent code in Python. It's utilized for handling asynchronous tasks like I/O-bound functions and networking.
+[Asyncio](https://docs.python.org/3/library/asyncio.html) is a library used to write concurrent code in Python. It's utilized for handling asynchronous tasks like I/O-bound functions and networking.<br>
+
 3. #### **Threading**
-[Threading](https://docs.python.org/3/library/threading.html) is used for executing multiple threads (lighter than processes) in parallel, enabling background tasks without blocking the main program.
+[Threading](https://docs.python.org/3/library/threading.html) is used for executing multiple threads (lighter than processes) in parallel, enabling background tasks without blocking the main program.<br>
+
 4. #### **NumPy**
-[NumPy](https://numpy.org/) is a powerful numerical computing library in Python. It is used for mathematical operations, array multiplications, or any complex number-crunching tasks.
+[NumPy](https://numpy.org/) is a powerful numerical computing library in Python. It is used for mathematical operations, array multiplications, or any complex number-crunching tasks.<br>
+
 5. #### **Bleak**
 [Bleak](https://github.com/hbldh/bleak) is a Python library for Bluetooth Low Energy (BLE) communications. It is used to interact with BLE devices.
 ```arduino
