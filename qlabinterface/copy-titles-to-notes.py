@@ -1,5 +1,6 @@
 from qlab_interface import Interface
 
+#Constant values for the show
 FIRST_CUE = 0
 LAST_CUE = 9999
 
@@ -11,10 +12,7 @@ def populate_notes(interface):
             return
         caption_type = interface.get_cue_property('selected', 'type')
         print('caption type', caption_type)
-        if caption_type == 'Titles':
-            notes = interface.get_cue_text('selected')
-        else:
-            notes = interface.get_cue_property('selected', 'name')
+        notes = interface.get_cue_text('selected') if caption_type == 'Titles' else interface.get_cue_property('selected', 'name')
         print(notes)
         if notes:
             interface.set_cue_property('selected', 'notes', notes)

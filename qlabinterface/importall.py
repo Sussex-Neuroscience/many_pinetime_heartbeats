@@ -2,6 +2,8 @@ from pythonosc import osc_message_builder
 from pythonosc import udp_client
 import time
 
+#This is just not readable, will add in notes
+
 '''
 [{"surfaceID":665967233,"surfaceName":"SR (FOHL) Over Office"}
 {"surfaceID":376297370,"surfaceName":"ACT 3+4 SL (FOHR) Movable Wall"}
@@ -29,15 +31,14 @@ import markdown
 from bs4 import BeautifulSoup
 
 def load_titles(act_number):
-    # all_titles = list(filter(bool, [quote.strip() for quote in open('act2.md.titles-only').read().replace('> ', '').split('\n\n')]))
-    raw = open('captions/act{}.md'.format(act_number)).read()
+    with open(f'captions/act{act_number}.md', 'r') as file:
+        raw = file.read()
     html = markdown.markdown(raw)
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, features='html.parser')
     quotes = soup.find_all('blockquote')
-    captions = [q.get_text().strip().replace('\n', ' ') for q in quotes]
-    #print('\n\n'.join(captions))
+    captions = [quote.get_text().strip().replace('\n', ' ') for quote in quotes]
     return captions
- 
+
 
 
 def import_titles(titles):

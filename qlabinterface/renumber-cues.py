@@ -2,18 +2,18 @@ from qlab_interface import Interface
 
 def process_group(interface, group_cue_no):
     group_cues = interface.get_cue_property(group_cue_no, 'children')
-    subgroup_no = 0
     item_no = 0
     for cue_info in group_cues:
-        cue_no = cue_info.get('number')
         item_no += 1
-        new_no = '{}.{}'.format(group_cue_no, item_no)
+        cue_no = cue_info.get('number')
         cue_name = interface.get_cue_property(cue_no, 'name')
         cue_type = interface.get_cue_property(cue_no, 'type')
 
         if cue_type == 'Fade':
             target = interface.get_cue_property(cue_no, 'cueTargetNumber')
             new_no = '{}.off'.format(target)
+        else:
+            new_no = '{}.{}'.format(group_cue_no, item_no)
 
         interface.set_cue_property(cue_no, 'number', new_no)
         if cue_name:

@@ -1,0 +1,15 @@
+Features:
+1) Allow user to press button on see watches available to connect to on local network
+2) Has a connect all button (to watches)
+3) Can select which watches want to connect to
+4) Can just connect to one watch at a time
+5) A button which collects data from the watch/es
+6) A button to disconnect from watch/es
+
+
+Use cases:
+1)
+2)
+
+Explaination:
+

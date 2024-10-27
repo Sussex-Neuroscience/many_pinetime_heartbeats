@@ -1,8 +1,18 @@
+"""
+Created on Wed Jun  7 23:28:00 2023
+Edited on Tue Jun 18 17:21:00 2024
+@author: andre
+
+This code is to allow multiple pinetime watches to connect to the software.
+Allows multiple sets of data to be collected at a time.
+
+@param: Takes devices addresses as input
+@return: Not 100% what it gives back
+"""
 import asyncio
 
 from bleak import BleakClient
-
-
+ 
 MOTION_SERVICE_UUID = "00030000-78fc-48fe-8e23-433b3a1942d0"
 STEP_COUNT_UUID = "00030001-78fc-48fe-8e23-433b3a1942d0"
 RAW_XYZ_UUID = "00030002-78fc-48fe-8e23-433b3a1942d0"
@@ -33,8 +43,11 @@ async def connect_to_device(address):
             await client.stop_notify(notify_uuid)
         except Exception as e:
             print(e)
-
+        # Actually allows the watch to be disconnected
+        finally:
+            await client.disconnect()
     print("disconnect from", address)
+
 
 
 def main(addresses):

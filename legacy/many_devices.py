@@ -2,8 +2,12 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun  7 23:28:00 2023
-
+Edited on Tue Jun 18 18:08:00 2024
 @author: andre
+Program is used to search for devices on a network/geographical location.
+If it finds a device attempt to communicate with it, after 5 seconds move onto next device.
+@param: Does not take any input
+@return: Nothing - Outputs services of each device it can communicate with
 """
 
 import asyncio

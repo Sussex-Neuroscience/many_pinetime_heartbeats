@@ -1,26 +1,11 @@
 from qlab_interface import Interface
-
-ROMANS = {
-    1: 'I',
-    2: 'II',
-    3: 'III',
-    4: 'IV',
-    5: 'V',
-    6: 'VI',
-    7: 'VII',
-    8: 'VIII',
-    9: 'IX',
-    10: 'X',
-    11: 'XI',
-    12: 'XII',
-    13: 'XIII',
-    14: 'XIV',
-    15: 'XV',
-    16: 'XVI',
-}
+#Allows us to convert integers to roman numerals, if there are more than 16 scenes
+import roman
 
 def _fix_scene_numbers(interface):
     last_cue_no = None
+    #This code block iterates through the queues till either it reaches the last queue or the current queue is none
+    #So it will return none
     while True:
         cue_no = interface.select_next_cue()
         if cue_no and '--' in cue_no:
@@ -32,7 +17,8 @@ def _fix_scene_numbers(interface):
             act = int(act)
             scene, rest = rest.split('.', 1)
             scene = int(scene)
-            new_no = '{}-{}  {}'.format(act, ROMANS[scene], rest)
+            numeral = roman.toRoman(scene)
+            new_no = '{}-{}  {}'.format(act, numeral, rest)
             interface.set_cue_property('selected', 'number', new_no)
 
 if __name__ == '__main__':
