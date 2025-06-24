@@ -2,6 +2,7 @@
 Welcome to the documentation folder for the **Many_Pinetimes_Heartbeat** project. This project is initially to support an art installation where PineTime watches being used by visitors will send information (Heart rate, xyz, step count) to a computer and this will be used to control what is being shown to visitors (audio visual projections, etc).
 
 ## Table of contents
+- [Prototyping](#prototyping-folder)
 - [Legacy Folder](#legacy-folder)
 - [Qlabinterface Folder](#qlabinterface-folder)
 - [PyQt-Interface Folder](#pyqtinterface-folder)
@@ -10,6 +11,10 @@ Welcome to the documentation folder for the **Many_Pinetimes_Heartbeat** project
 - [Pinetime Website](#pinetime-website)
 - [Miscellaneous Files](#miscellaneous-files)
 - [Setup and Usage](#setup-and-usage-guide)
+
+### Prototyping Folder
+[Prototype](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Prototyping/Design.md)
+This folder contains the various information and links to the creation of the updated application.
 
 ### Legacy Folder
 [Legacy](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Legacy/Readme.md)<br>
