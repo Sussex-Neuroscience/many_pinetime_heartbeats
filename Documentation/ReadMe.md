@@ -13,7 +13,7 @@ Welcome to the documentation folder for the **Many_Pinetimes_Heartbeat** project
 - [Setup and Usage](#setup-and-usage-guide)
 
 ### Prototyping Folder
-[Prototype](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Prototyping/Design.md)
+[Prototype](https://github.com/KeaganKozlowski/many_pinetime_heartbeats/blob/main/Documentation/Prototyping/Design.md)<br>
 This folder contains the various information and links to the creation of the updated application.
 
 ### Legacy Folder
